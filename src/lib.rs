@@ -4,7 +4,13 @@ use std::fmt;
 use std::fmt::Formatter;
 use std::ptr::write;
 use wasm_bindgen::prelude::*;
+extern crate web_sys;
 
+macro_rules! log {
+    ( $( $t:tt )* ) => {
+        web_sys::console::log_1(&format!( $( $t )* ).into());
+    }
+}
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
 #[cfg(feature = "wee_alloc")]
@@ -41,6 +47,8 @@ pub struct Universe {
 impl Universe {
 
     pub fn new() -> Universe {
+        utils::set_panic_hook();
+
         let width = 64;
         let height = 64;
 
@@ -53,6 +61,11 @@ impl Universe {
                 }
             }
         ).collect();
+        log!(
+            "Cell size, width={}, height={}",
+            width,
+            height
+        );
         Universe {
             width,
             height,
