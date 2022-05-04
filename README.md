@@ -8,6 +8,13 @@
   <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
 </div>
 
+### Build and Run
+```shell
+wasm-pack build
+cd www
+npm run start
+```
+
 ### Test
 
 ```bash
